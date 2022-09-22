@@ -1,0 +1,11 @@
+--- a/test/mimemagic_test.rb
++++ b/test/mimemagic_test.rb
+@@ -44,7 +44,7 @@
+   end
+ 
+   def test_have_extensions
+-    assert_equal %w(htm html), MimeMagic.new('text/html').extensions
++    assert_equal ["htm", "html"].sort, MimeMagic.new('text/html').extensions.sort
+   end
+ 
+   def test_have_comment

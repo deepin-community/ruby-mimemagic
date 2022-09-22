@@ -1,0 +1,34 @@
+implement a dpkg trigger to update mimemagic/tables.rb
+from /usr/share/mime/packages/freedesktop.org.xml
+using the provided script/generate-mime.rb.
+
+This would use:
+ - a debian/triggers file with:
+        interest /usr/share/mime/packages/freedesktop.org.xml
+ - a debian/postint file with something like:
+        !/bin/sh
+        set -e
+
+        MIMEMAGIC_SHARE=/usr/share/ruby-mimemagic
+        MIMEMAGIC_LIB=/usr/lib/ruby/vendor_ruby/mimemagic
+        MIMEDB=/usr/share/mime/packages/freedesktop.org.xml
+
+        # generate automatically mimemagic/tables.rb from system MIME database
+        # shipped by the shared-mime-info package
+
+        if [ "$1" = "triggered" ]; then
+          if [ -x $MIMEMAGIC_SHARE/generate-mime.rb ]; then
+            $MIMEMAGIC_SHARE/generate-mime.rb $MIMEDB > $MIMEMAGIC_LIB/tables.rb
+          fi
+          exit 0
+        fi
+
+        #DEBHELPER#
+
+ - a way to update lib/mimemagic/tables.rb before running the tests.
+
+
+Unfortunately, for the moment, this script fails on the system
+freedesktop.org.xml file.
+
+ -- Cédric Boutillier <boutil@debian.org>  Fri, 24 Apr 2015 14:48:50 +0200

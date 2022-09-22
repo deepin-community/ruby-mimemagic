@@ -1,0 +1,28 @@
+Source: ruby-mimemagic
+Section: ruby
+Priority: optional
+Maintainer: Debian Ruby Team <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Cédric Boutillier <boutil@debian.org>
+Build-Depends: debhelper-compat (= 13),
+               gem2deb (>= 1),
+               rake,
+               ruby-bacon
+Standards-Version: 4.5.0
+Vcs-Git: https://salsa.debian.org/ruby-team/ruby-mimemagic.git
+Vcs-Browser: https://salsa.debian.org/ruby-team/ruby-mimemagic
+Homepage: https://github.com/minad/mimemagic
+Testsuite: autopkgtest-pkg-ruby
+XS-Ruby-Versions: all
+Rules-Requires-Root: no
+
+Package: ruby-mimemagic
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${misc:Depends},
+         ${ruby:Depends},
+         ${shlibs:Depends}
+Description: fast MIME detection by extension or content
+ The mimemagic Ruby library provides fast MIME detection by extension or
+ content. It uses the freedesktop.org MIME database provided by the
+ shared-mime-info package. It also contains some extra magic to detect
+ Microsoft Office 2007+ formats.
